@@ -17,7 +17,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetExcelUsuariosRequestDto {
 
-    private String empresa;
+    /*private String empresa;
     private String nombre;
     private String segundoNombre;
     private String tercerNombre;
@@ -32,6 +32,6 @@ public class GetExcelUsuariosRequestDto {
     private String telefonoParticular;
     private String correo;
     private String observaciones;
-    private String cardNumber;
+    private String cardNumber;*/
     private List<ExcelUsuario> excelUsuarios;
 }

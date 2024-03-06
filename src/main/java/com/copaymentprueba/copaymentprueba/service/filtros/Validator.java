@@ -5,20 +5,18 @@ import com.copaymentprueba.copaymentprueba.dao.entities.ExcelUsuario;
 public class Validator {
 
     // Regular expressions for validation
-    private static final String EMPRESA_REGEX = "";
-    private static final String NOMBRE_REGEX = "";
-    private static final String SEGUNDO_NOMBRE_REGEX = "";
-    private static final String TERCER_NOMBRE_REGEX = "";
-    private static final String FECHA_NACIMIENTO_REGEX = "";
+    private static final String EMPRESA_REGEX = "^[A-Z]+$";
+    private static final String NOMBRE_REGEX = "^[A-Za-zÀ-ÖØ-öø-ÿ\\s\\-']+$";
+    private static final String FECHA_NACIMIENTO_REGEX = "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-(\\d{4})$";
     private static final String RFC_REGEX = "^[A-ZÑ&]{3,4}\\d{6}[A-V1-9][A-Z1-9]\\d$";
-    private static final String ID_ESTADO_REGEX = "";
+    private static final String ID_ESTADO_REGEX = "^\\d{1,32}$";
     private static final String CURP_REGEX = "^[A-Z]{4}\\d{6}[HM][A-Z]{5}[0-9A-Z]{2}$";
-    private static final String ESTADO_CIVIL_REGEX = "";
-    private static final String TELEFONO_REGEX = "";
+    private static final String ESTADO_CIVIL_REGEX = "^(S|CS|CM|CC|V|D|U)$";
+    private static final String TELEFONO_REGEX = "^\\d{8}$";
     private static final String TELEFONO_PARTICULAR_REGEX = "^\\d{10}$";
     private static final String CORREO_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     private static final String OBSERVACIONES_REGEX = "";
-    private static final String CARD_NUMBER_REGEX = "";
+    private static final String CARD_NUMBER_REGEX = "^\\d{16}$";
 
     // Method to validate an ExcelUsuario object
     public static boolean validate(ExcelUsuario usuario) {
@@ -80,7 +78,7 @@ public class Validator {
                 isValidEstadoCivil &&
                 isValidTelefono &&
                 isValidTelefonoParticular &&
-                isValidObservaciones &&
+                //isValidObservaciones &&
                 isValidCardNumber;
     }
 

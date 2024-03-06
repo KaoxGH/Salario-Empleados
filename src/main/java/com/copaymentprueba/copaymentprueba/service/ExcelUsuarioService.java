@@ -6,6 +6,7 @@ import com.copaymentprueba.copaymentprueba.repository.ExcelUsuarioRepository;
 import com.copaymentprueba.copaymentprueba.service.interfaces.IExcelUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.ArrayList;
@@ -20,6 +21,12 @@ public class ExcelUsuarioService implements IExcelUsuarioService {
     @Override
     public List<ExcelUsuario> getAllEmpleados() {
         return null;
+    }
+
+    @Override
+    @Transactional
+    public void guardarExcelUsuarios(List<ExcelUsuario> excelUsuarios){
+        excelUsuarioRepository.saveAll(excelUsuarios);
     }
 
     @Override

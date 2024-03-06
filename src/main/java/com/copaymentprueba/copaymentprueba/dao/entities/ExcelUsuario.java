@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "empleados")
+@Table(name = "excel_usuarios")
 public class ExcelUsuario {
 
     @Id

@@ -8,5 +8,7 @@ public interface IExcelUsuarioService {
 
     List<ExcelUsuario> getAllEmpleados();
 
+    void guardarExcelUsuarios(List<ExcelUsuario> excelUsuarios);
+
     List<List<ExcelUsuario>> validarExcelUsuarios(List<ExcelUsuario> excelUsuarios);
 }

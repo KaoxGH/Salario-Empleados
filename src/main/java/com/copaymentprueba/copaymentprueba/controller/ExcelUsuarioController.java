@@ -1,6 +1,7 @@
 package com.copaymentprueba.copaymentprueba.controller;
 
 
+import com.copaymentprueba.copaymentprueba.dao.entities.ExcelUsuario;
 import com.copaymentprueba.copaymentprueba.dto.GetEmpleadoResponseDto;
 import com.copaymentprueba.copaymentprueba.dto.GetExcelUsuariosRequestDto;
 import com.copaymentprueba.copaymentprueba.dto.GetExcelUsuariosResponseDto;
@@ -25,10 +26,19 @@ public class ExcelUsuarioController {
     @PostMapping("getExcelUsuarios")
     public ResponseEntity<GetExcelUsuariosResponseDto> getExcelUsuarios(@RequestBody GetExcelUsuariosRequestDto requestDto){
         GetExcelUsuariosResponseDto responseDto = new GetExcelUsuariosResponseDto();
-        responseDto.setExcelUsuariosValidados(excelUsuarioService.validarExcelUsuarios(requestDto.getExcelUsuarios()));
-        responseDto.setResponseCode("00");
-        responseDto.setResponseMessage("Los usuarios validados se han enviado con exito.");
-        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        List<List<ExcelUsuario>> arrayDeArrays = excelUsuarioService.validarExcelUsuarios(requestDto.getExcelUsuarios());
+        if(arrayDeArrays.get(1).isEmpty()) //si el segundo Arreglo dentro del arreglo de arreglos no tiene nada, significa que todos los usuarios están validados
+        {
+            responseDto.setResponseCode("00");
+            responseDto.setResponseMessage("Los usuarios validados se han guardado con exito.");
+            return new ResponseEntity<>(HttpStatus.OK);
+
+            }else {
+                responseDto.setExcelUsuariosValidados(arrayDeArrays);
+                responseDto.setResponseCode("00");
+                responseDto.setResponseMessage("Los usuarios han sido enviados con exito. Faltan usuarios por validar");
+                return new ResponseEntity<>(responseDto, HttpStatus.OK);
+            }
     }
 
 }
