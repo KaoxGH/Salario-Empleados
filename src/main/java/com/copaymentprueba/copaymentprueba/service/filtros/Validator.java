@@ -1,0 +1,91 @@
+package com.copaymentprueba.copaymentprueba.service.filtros;
+
+import com.copaymentprueba.copaymentprueba.dao.entities.ExcelUsuario;
+
+public class Validator {
+
+    // Regular expressions for validation
+    private static final String EMPRESA_REGEX = "";
+    private static final String NOMBRE_REGEX = "";
+    private static final String SEGUNDO_NOMBRE_REGEX = "";
+    private static final String TERCER_NOMBRE_REGEX = "";
+    private static final String FECHA_NACIMIENTO_REGEX = "";
+    private static final String RFC_REGEX = "^[A-ZÑ&]{3,4}\\d{6}[A-V1-9][A-Z1-9]\\d$";
+    private static final String ID_ESTADO_REGEX = "";
+    private static final String CURP_REGEX = "^[A-Z]{4}\\d{6}[HM][A-Z]{5}[0-9A-Z]{2}$";
+    private static final String ESTADO_CIVIL_REGEX = "";
+    private static final String TELEFONO_REGEX = "";
+    private static final String TELEFONO_PARTICULAR_REGEX = "^\\d{10}$";
+    private static final String CORREO_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    private static final String OBSERVACIONES_REGEX = "";
+    private static final String CARD_NUMBER_REGEX = "";
+
+    // Method to validate an ExcelUsuario object
+    public static boolean validate(ExcelUsuario usuario) {
+        if (usuario == null) {
+            return false; // Object is null, cannot validate
+        }
+
+        // Validate each field using regular expressions
+        boolean isValidEmpresa = validateField(usuario.getEmpresa(), EMPRESA_REGEX);
+        boolean isValidNombre = validateField(usuario.getNombre(), NOMBRE_REGEX);
+        //boolean isValidSegundoNombre = validateField(usuario.getSegundoNombre(), SEGUNDO_NOMBRE_REGEX);
+        //boolean isValidTercerNombre = validateField(usuario.getTercerNombre(), TERCER_NOMBRE_REGEX);
+        boolean isValidApellidoPaterno = validateField(usuario.getApellidoPaterno(), NOMBRE_REGEX);
+        boolean isValidApellidoMaterno = validateField(usuario.getApellidoMaterno(), NOMBRE_REGEX);
+        boolean isValidCorreo = validateField(usuario.getCorreo(), CORREO_REGEX);
+        boolean isValidFechaNacimiento = validateField(usuario.getFechaDeNacimiento(), FECHA_NACIMIENTO_REGEX);
+        boolean isValidRFC = validateField(usuario.getRfc(), RFC_REGEX);
+        boolean isValidIdEstado = validateField(usuario.getIdEstado(), ID_ESTADO_REGEX);
+        boolean isValidCURP = validateField(usuario.getCurp(), CURP_REGEX);
+        boolean isValidEstadoCivil = validateField(usuario.getEstadoCivil(), ESTADO_CIVIL_REGEX);
+        boolean isValidTelefono = validateField(usuario.getTelefono(), TELEFONO_REGEX);
+        //boolean isValidTelefonoParticular = validateField(usuario.getTelefonoParticular(), TELEFONO_PARTICULAR_REGEX);
+        //boolean isValidObservaciones = validateField(usuario.getObservaciones(), OBSERVACIONES_REGEX);
+        boolean isValidCardNumber = validateField(usuario.getCardNumber(), CARD_NUMBER_REGEX);
+
+        // Optional fields
+        boolean isValidSegundoNombre = true; // Assume it's valid by default
+        if (usuario.getSegundoNombre() != null) {
+            isValidSegundoNombre = validateField(usuario.getSegundoNombre(), NOMBRE_REGEX);
+        }
+
+        boolean isValidTercerNombre = true; // Assume it's valid by default
+        if (usuario.getTercerNombre() != null) {
+            isValidTercerNombre = validateField(usuario.getTercerNombre(), NOMBRE_REGEX);
+        }
+
+        boolean isValidTelefonoParticular = true; // Assume it's valid by default
+        if (usuario.getTelefonoParticular() != null) {
+            isValidTelefonoParticular = validateField(usuario.getTelefonoParticular(), TELEFONO_PARTICULAR_REGEX);
+        }
+
+        boolean isValidObservaciones = true; // Assume it's valid by default
+        if (usuario.getObservaciones() != null) {
+            isValidObservaciones = validateField(usuario.getObservaciones(), OBSERVACIONES_REGEX);
+        }
+
+        // Return true if all fields are valid, false otherwise
+        return isValidEmpresa &&
+                isValidNombre &&
+                isValidSegundoNombre &&
+                isValidTercerNombre &&
+                isValidApellidoPaterno &&
+                isValidApellidoMaterno &&
+                isValidCorreo &&
+                isValidFechaNacimiento &&
+                isValidRFC &&
+                isValidIdEstado &&
+                isValidCURP &&
+                isValidEstadoCivil &&
+                isValidTelefono &&
+                isValidTelefonoParticular &&
+                isValidObservaciones &&
+                isValidCardNumber;
+    }
+
+    // Method to validate a field using a regular expression
+    private static boolean validateField(String fieldValue, String regex) {
+        return fieldValue != null && fieldValue.matches(regex);
+    }
+}
