@@ -1,5 +1,7 @@
 package com.copaymentprueba.copaymentprueba.service;
 
+import com.copaymentprueba.copaymentprueba.dto.ExcelUsuariosResponseEntity;
+import com.copaymentprueba.copaymentprueba.dto.GetExcelUsuariosRequestDto;
 import com.copaymentprueba.copaymentprueba.service.filtros.Validator;
 import com.copaymentprueba.copaymentprueba.dao.entities.ExcelUsuario;
 import com.copaymentprueba.copaymentprueba.repository.ExcelUsuarioRepository;
@@ -11,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.copaymentprueba.copaymentprueba.service.filtros.Validator.validate;
+import static com.copaymentprueba.copaymentprueba.service.filtros.Validator.validateV2;
 
 @Service
 public class ExcelUsuarioService implements IExcelUsuarioService {
@@ -34,7 +39,7 @@ public class ExcelUsuarioService implements IExcelUsuarioService {
         List<ExcelUsuario> excelUsuariosValidados = new ArrayList<>();
         List<ExcelUsuario> excelUsuariosNoValidados = new ArrayList<>();
         for (ExcelUsuario excelUsuario:excelUsuarios){
-            if (Validator.validate(excelUsuario))
+            if (validate(excelUsuario))
                 excelUsuariosValidados.add(excelUsuario);
             else excelUsuariosNoValidados.add(excelUsuario);
         }
@@ -42,5 +47,19 @@ public class ExcelUsuarioService implements IExcelUsuarioService {
         excelArrayUsuarios.add(excelUsuariosValidados);
         excelArrayUsuarios.add(excelUsuariosNoValidados);
         return excelArrayUsuarios;
+    }
+
+    @Override
+    public List<ExcelUsuariosResponseEntity> validarExcelUsuariosEntities(List<ExcelUsuario> excelUsuarios) {
+        List<ExcelUsuariosResponseEntity> excelUsuariosNoValidados = new ArrayList<>();
+        for (ExcelUsuario excelUsuario:excelUsuarios){
+            ExcelUsuariosResponseEntity excelUsuariosEntity = new ExcelUsuariosResponseEntity(excelUsuario);
+            List<String> errorCampos = validateV2(excelUsuariosEntity);
+            if (!errorCampos.isEmpty()){
+                excelUsuariosEntity.setErrorCampos(errorCampos);
+                excelUsuariosNoValidados.add(excelUsuariosEntity);
+            }
+        }
+        return excelUsuariosNoValidados;
     }
 }

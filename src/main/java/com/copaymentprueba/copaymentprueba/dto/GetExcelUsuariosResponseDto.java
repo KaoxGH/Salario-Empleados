@@ -16,5 +16,23 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GetExcelUsuariosResponseDto extends ResponseBaseDto{
 
+    /*private String empresa;
+    private String nombre;
+    private String segundoNombre;
+    private String tercerNombre;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
+    private String fechaDeNacimiento;
+    private String rfc;
+    private String idEstado;
+    private String curp;
+    private String estadoCivil;
+    private String telefono;
+    private String telefonoParticular;
+    private String correo;
+    private String observaciones;
+    private String cardNumber;*/
     private List<List<ExcelUsuario>> excelUsuariosValidados;
+
+    private List<ExcelUsuariosResponseEntity> responseData;
 }
