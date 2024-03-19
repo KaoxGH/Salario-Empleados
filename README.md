@@ -3,9 +3,8 @@
 En esta API (sólo Backend), por medio de métodos POST, se encuentran las funcionalidades CRUD para un sistema de empleados. Agregado a eso, hay un sistema de logueo en donde
 se registra la hora de entrada y de salida de cada empleado por medio de su nombre de usuario. Utilizando la funcionalidad anterior, la API cálcula su salario total por día de 
 acuerdo al departamento en el que el empleado está registrado. Cada departamento tiene establecido un salario fijo.  
-<p align="center">
-  <img src=https://github.com/KaoxGH/Salario-Empleados-API/assets/29785115/1a7db6b5-fd88-404e-bbbd-42ded97d7f5f" alt="animated" />
-</p>
+
+https://github.com/KaoxGH/Salario-Empleados-API/assets/29785115/9b366dae-014b-401b-83b9-874b4109a9b6
 
 ## Ficha técnica:
 Realiza una API de administración de empleados (sin front).
