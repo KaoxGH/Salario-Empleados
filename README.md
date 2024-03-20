@@ -40,7 +40,7 @@ la base de datos:
 | Columna         | Tipo          | Restricciones     |
 |-----------------|---------------|-------------------|
 | id              | INT           | PRIMARY KEY, AUTO_INCREMENT |
-| nombre          | VARCHAR(255)  | NOT NULL          |
+| usuario         | VARCHAR(255)  | NOT NULL, UNIQUE  |
 | password        | VARCHAR(255)  | NOT NULL          |
 | departamento_id | INT           |                   |
 |                 | FOREIGN KEY (departamento_id) REFERENCES departamento(id) |
@@ -74,7 +74,7 @@ La estructura en el ambiente de desarrollo en IntelliJ está organizado de la si
 **-DTO** para crear nuestras clases de peticiones y respuestas en formato JSON.  
 **-Entity** en donde creamos nuestras clases entidad. Obligatorias para comunicarnos con la base de datos y trabajar con nuestros objetos.  
 **-Repository** para crear los lazos de comunicación de nuestras peticiones y respuestas con nuestra base de datos utilizando JpaRepository.  
-**-Service** es en donde se codifica toda la lógica de negocio. Las instrucciones o validaciones por las que tiene que pasar nuestra información antes de almacenarse en nuestra base de datos.  
+**-Service** es en donde se codifica toda la lógica de negocio. Las instrucciones o validaciones con expresiones regulares por las que tiene que pasar nuestra información antes de almacenarse en nuestra base de datos.  
 **-Util** para nuestras clases de apoyo. Aquí cree una clase que contiene un método que cálcula el salario del empleado. Se toma la hora de entrada y de salida para hacer la operación.  
 
 ## Endpoints
@@ -110,6 +110,6 @@ y se obtendra de respuesta un JSON con el siguiente formato:
   }
 }
 ```
-Además de que devolverá un **código de respuesta 200 OK** si la petición y la respuesta fueron correctas.  
+Además de que devolverá un **código de estado 200 OK** si la petición y la respuesta fueron correctas.  
 Aquí una prueba con Postman:  
 ![image](https://github.com/KaoxGH/Salario-Empleados-API/assets/29785115/0b4d030e-c542-4dc3-bfec-6dfc8f8d88e8)
